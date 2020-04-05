@@ -19,21 +19,18 @@ const Game = () => {
     return isXNext ? PLAYERS.O : PLAYERS.X;
   };
 
-  const turn = (squareIdx, player) => {
+  const turn = (squareIdx) => {
     const cells = [...squares];
     cells[squareIdx] = {
       ...cells[squareIdx],
-      value: player,
+      value: current(),
       isFilled: true,
     };
     setSquares(cells);
   };
 
   const handlePress = (squareIdx) => {
-    const player = current();
-
-    turn(squareIdx, player);
-
+    turn(squareIdx);
     setIsXNext(!isXNext);
   };
 
@@ -52,6 +49,11 @@ const Game = () => {
 
       setStatus(STATUS.WIN);
       setSquares(cells);
+    } else {
+      const isAllFilled = !cells.some((cell) => !cell.isFilled);
+      if (isAllFilled) {
+        setStatus(STATUS.DRAW);
+      }
     }
   }, [squares]);
 
