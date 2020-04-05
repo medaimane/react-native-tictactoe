@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Board from '../components/Board';
 import Status from '../components/Status';
 import ReplayButton from '../components/ReplayButton';
@@ -45,29 +45,31 @@ const Game = () => {
     setIsXNext(!isXNext);
   };
 
-  const winning = (combination) => {
-    setStatus(STATUS.WIN);
+  useEffect(() => {
+    const winning = (combination) => {
+      setStatus(STATUS.WIN);
 
-    const cells = [...squares];
-    combination.forEach((idx) => {
-      cells[idx] = {
-        ...cells[idx],
-        isWin: true,
-      };
-    });
+      const cells = [...squares];
+      combination.forEach((idx) => {
+        cells[idx] = {
+          ...cells[idx],
+          isWin: true,
+        };
+      });
 
-    setSquares(cells.map((cell) => ({...cell, isFilled: true})));
-  };
+      setSquares(cells.map((cell) => ({...cell, isFilled: true})));
+    };
 
-  const checkIfDraw = () => {
-    const isAllCellFilled = !squares.some((s) => !s.isFilled);
-    isAllCellFilled && setStatus(STATUS.DRAW);
-  };
+    const checkIfDraw = () => {
+      const isAllCellFilled = !squares.some((s) => !s.isFilled);
+      isAllCellFilled && setStatus(STATUS.DRAW);
+    };
 
-  if (status === STATUS.PLAY) {
-    const {winner, combination} = calculateWinner(squares);
-    winner ? winning(combination) : checkIfDraw();
-  }
+    if (status === STATUS.PLAY) {
+      const {winner, combination} = calculateWinner(squares);
+      winner ? winning(combination) : checkIfDraw();
+    }
+  }, [squares, status]);
 
   return (
     <>
