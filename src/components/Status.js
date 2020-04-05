@@ -11,6 +11,7 @@ const Status = (props) => {
   );
 
   switch (props.status) {
+    case STATUS.INIT:
     case STATUS.PLAY:
       return buildStatus('🎬 Next Player ' + props.player);
     case STATUS.WIN:
@@ -22,6 +23,7 @@ const Status = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 8,
     paddingVertical: 16,
     paddingHorizontal: 20,
     justifyContent: 'center',

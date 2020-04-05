@@ -1,21 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import Board from '../components/Board';
 import Status from '../components/Status';
+import ReplayButton from '../components/ReplayButton';
 import {PLAYERS, STATUS} from '../utils/constants';
 import {buildBoard, calculateWinner} from '../utils/utils';
 
+const initialState = {
+  squares: buildBoard(),
+  isXNext: true,
+  status: STATUS.INIT,
+};
+
 const Game = () => {
-  const [squares, setSquares] = useState(buildBoard());
-  const [isXNext, setIsXNext] = useState(true);
-  const [status, setStatus] = useState(STATUS.PLAY);
+  const [squares, setSquares] = useState(initialState.squares);
+  const [isXNext, setIsXNext] = useState(initialState.isXNext);
+  const [status, setStatus] = useState(initialState.status);
+
+  const isEnd = () => status === STATUS.DRAW || status === STATUS.WIN;
+
+  const reInit = () => {
+    setSquares(initialState.squares);
+    setIsXNext(initialState.isXNext);
+    setStatus(initialState.status);
+  };
 
   const current = () => (isXNext ? PLAYERS.X : PLAYERS.O);
 
   const player = () => {
-    if (status === STATUS.PLAY) {
+    if (!isEnd()) {
       return current();
     }
-
     return isXNext ? PLAYERS.O : PLAYERS.X;
   };
 
@@ -31,36 +45,41 @@ const Game = () => {
 
   const handlePress = (squareIdx) => {
     turn(squareIdx);
+    setStatus(STATUS.PLAY);
     setIsXNext(!isXNext);
   };
 
-  useEffect(() => {
-    const cells = squares;
-    const {winner, combination} = calculateWinner(cells);
+  const winning = (combination) => {
+    setStatus(STATUS.WIN);
 
-    if (winner && combination) {
-      combination.forEach((idx) => {
-        cells[idx] = {
-          ...cells[idx],
-          isWin: true,
-        };
-      });
-      cells.forEach((c) => (c.isFilled = true));
+    const cells = [...squares];
+    combination.forEach((idx) => {
+      cells[idx] = {
+        ...cells[idx],
+        isWin: true,
+      };
+    });
 
-      setStatus(STATUS.WIN);
-      setSquares(cells);
-    } else {
-      const isAllFilled = !cells.some((cell) => !cell.isFilled);
-      if (isAllFilled) {
-        setStatus(STATUS.DRAW);
-      }
+    setSquares(cells.map((c) => ({...c, isFilled: true})));
+  };
+
+  const checkIfDraw = () => {
+    const isBoardFilled = !squares.some((s) => !s.isFilled);
+    if (isBoardFilled) {
+      setStatus(STATUS.DRAW);
     }
-  }, [squares]);
+  };
+
+  if (status === STATUS.PLAY) {
+    const {winner, combination} = calculateWinner(squares);
+    winner ? winning(combination) : checkIfDraw();
+  }
 
   return (
     <>
       <Board squares={squares} onSquarePress={handlePress} />
       <Status status={status} player={player()} />
+      {isEnd() && <ReplayButton onPress={reInit} />}
     </>
   );
 };

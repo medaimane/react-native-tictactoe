@@ -22,20 +22,6 @@ const styles = StyleSheet.create({
     padding: 8,
     color: Colors.Text,
     fontSize: 30,
-    lineHeight: 30,
-  },
-  switch: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 16,
-  },
-  text: {
-    textAlign: 'center',
-    color: Colors.Text,
-    fontSize: 30,
-    lineHeight: 30,
-    paddingHorizontal: 16,
   },
 });
 

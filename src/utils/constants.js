@@ -4,7 +4,8 @@ export const PLAYERS = {
 };
 
 export const STATUS = {
-  GAME_OVER: 'GAME_OVER',
+  INIT: 'INIT',
+  DRAW: 'DRAW',
   WIN: 'WIN',
   PLAY: 'PLAY',
 };
