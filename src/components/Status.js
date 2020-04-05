@@ -33,9 +33,8 @@ const styles = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    textDecorationLine: 'underline',
     color: Colors.Text,
-    fontSize: 30,
+    fontSize: 25,
   },
 });
 

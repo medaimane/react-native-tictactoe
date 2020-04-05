@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Board from '../components/Board';
 import Status from '../components/Status';
 import ReplayButton from '../components/ReplayButton';
@@ -16,22 +16,18 @@ const Game = () => {
   const [isXNext, setIsXNext] = useState(initialState.isXNext);
   const [status, setStatus] = useState(initialState.status);
 
-  const isEnd = () => status === STATUS.DRAW || status === STATUS.WIN;
-
   const reInit = () => {
     setSquares(initialState.squares);
     setIsXNext(initialState.isXNext);
     setStatus(initialState.status);
   };
 
+  const isEnd = () => status === STATUS.DRAW || status === STATUS.WIN;
+
   const current = () => (isXNext ? PLAYERS.X : PLAYERS.O);
 
-  const player = () => {
-    if (!isEnd()) {
-      return current();
-    }
-    return isXNext ? PLAYERS.O : PLAYERS.X;
-  };
+  const player = () =>
+    isEnd() ? (isXNext ? PLAYERS.O : PLAYERS.X) : current();
 
   const turn = (squareIdx) => {
     const cells = [...squares];
@@ -44,8 +40,8 @@ const Game = () => {
   };
 
   const handlePress = (squareIdx) => {
-    turn(squareIdx);
     setStatus(STATUS.PLAY);
+    turn(squareIdx);
     setIsXNext(!isXNext);
   };
 
@@ -60,14 +56,12 @@ const Game = () => {
       };
     });
 
-    setSquares(cells.map((c) => ({...c, isFilled: true})));
+    setSquares(cells.map((cell) => ({...cell, isFilled: true})));
   };
 
   const checkIfDraw = () => {
-    const isBoardFilled = !squares.some((s) => !s.isFilled);
-    if (isBoardFilled) {
-      setStatus(STATUS.DRAW);
-    }
+    const isAllCellFilled = !squares.some((s) => !s.isFilled);
+    isAllCellFilled && setStatus(STATUS.DRAW);
   };
 
   if (status === STATUS.PLAY) {
