@@ -2,14 +2,17 @@ import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Colors from '../theme/colors';
 
-const Square = (props) => (
-  <TouchableOpacity
-    style={styles.container}
-    disabled={props.isFilled}
-    onPress={props.onPress}>
-    <Text style={styles.value}>{props.value}</Text>
-  </TouchableOpacity>
-);
+const Square = (props) => {
+  const backgroundColor = props.isWin ? Colors.Red : Colors.Yellow;
+  return (
+    <TouchableOpacity
+      style={[styles.container, {backgroundColor}]}
+      disabled={props.isFilled}
+      onPress={props.onPress}>
+      <Text style={styles.value}>{props.value}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

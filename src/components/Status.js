@@ -27,13 +27,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    backgroundColor: Colors.Blue,
   },
   text: {
     textAlign: 'center',
     textDecorationLine: 'underline',
     color: Colors.Text,
     fontSize: 30,
-    lineHeight: 30,
   },
 });
 

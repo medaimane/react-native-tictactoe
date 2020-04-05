@@ -18,8 +18,8 @@ const Board = (props) => (
 
 const styles = StyleSheet.create({
   container: {
-    margin: 16,
     width: 400,
+    marginVertical: 16,
     paddingHorizontal: 40,
     flexDirection: 'row',
     flexWrap: 'wrap',
