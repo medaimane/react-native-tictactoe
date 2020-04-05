@@ -3,13 +3,11 @@ export const PLAYERS = {
   O: '🐯',
 };
 
-const buildCell = () => ({
-  value: '.',
-  isFilled: false,
-  isWin: false,
-});
-
-export const buildBoard = () => Array(9).fill(buildCell);
+export const STATUS = {
+  GAME_OVER: 'GAME_OVER',
+  WIN: 'WIN',
+  PLAY: 'PLAY',
+};
 
 export const wins = [
   [0, 1, 2],

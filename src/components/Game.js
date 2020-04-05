@@ -1,29 +1,36 @@
 import React, {useState} from 'react';
 import Board from '../components/Board';
-import {buildBoard, PLAYERS} from '../utils/constants';
+import Status from '../components/Status';
+import {PLAYERS, STATUS} from '../utils/constants';
+import {buildBoard} from '../utils/utils';
 
 const Game = () => {
-  const [boardState, setBoardState] = useState(buildBoard());
-  const [isXNext, setIsXNext] = useState(false);
+  const [squares, setSquares] = useState(buildBoard());
+  const [isXNext, setIsXNext] = useState(true);
+  const [status, setStatus] = useState(STATUS.PLAY);
 
-  const turn = (squareIdx) => {
-    const squares = [...boardState];
-
-    squares[squareIdx] = {
-      ...squares[squareIdx],
-      value: isXNext ? PLAYERS.O : PLAYERS.X,
+  const turn = (squareIdx, player) => {
+    const cells = [...squares];
+    cells[squareIdx] = {
+      ...cells[squareIdx],
+      value: player,
       isFilled: true,
     };
-
-    setBoardState(squares);
-    setIsXNext(!isXNext);
+    setSquares(cells);
   };
 
   const handlePress = (squareIdx) => {
-    turn(squareIdx);
+    const player = isXNext ? PLAYERS.X : PLAYERS.O;
+    turn(squareIdx, player);
+    setIsXNext(!isXNext);
   };
 
-  return <Board squares={boardState} onSquarePress={handlePress} />;
+  return (
+    <>
+      <Board squares={squares} onSquarePress={handlePress} />
+      <Status status={status} player={isXNext ? PLAYERS.X : PLAYERS.O} />
+    </>
+  );
 };
 
 export default Game;
