@@ -1,6 +1,8 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import Colors from '../theme/colors';
+import PropTypes from 'prop-types';
+import {PLAYERS} from '../utils/constants';
 
 const Square = (props) => {
   const backgroundColor = props.isWin ? Colors.Red : Colors.Yellow;
@@ -30,5 +32,12 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
 });
+
+Square.propTypes = {
+  value: PropTypes.oneOf([PLAYERS.X, PLAYERS.O, '.']).isRequired,
+  isWin: PropTypes.bool.isRequired,
+  isFilled: PropTypes.bool.isRequired,
+  onPress: PropTypes.func.isRequired,
+};
 
 export default Square;

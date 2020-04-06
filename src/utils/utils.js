@@ -6,7 +6,7 @@ const buildCell = () => ({
   isWin: false,
 });
 
-export const buildBoard = () => Array(9).fill(buildCell);
+export const buildBoard = () => Array.apply(null, {length: 9}).map(buildCell);
 
 const isSquaresMatch = (sq1, sq2, sq3) => {
   const isValuesEqual = sq1.value === sq2.value && sq2.value === sq3.value;

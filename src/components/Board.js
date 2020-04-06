@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import Square from './Square';
+import PropTypes from 'prop-types';
+import {PLAYERS} from '../utils/constants';
 
 const Board = (props) => (
   <View style={styles.container}>
@@ -27,5 +29,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+Board.propTypes = {
+  squares: PropTypes.arrayOf(
+    PropTypes.exact({
+      value: PropTypes.oneOf([PLAYERS.X, PLAYERS.O, '.']).isRequired,
+      isFilled: PropTypes.bool.isRequired,
+      isWin: PropTypes.bool.isRequired,
+    }),
+  ).isRequired,
+  onSquarePress: PropTypes.func.isRequired,
+};
 
 export default Board;

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
-import {STATUS} from '../utils/constants';
+import {STATUS, PLAYERS} from '../utils/constants';
 import Colors from '../theme/colors';
+import PropTypes from 'prop-types';
 
 const Status = (props) => {
   const buildStatus = (text) => (
@@ -37,5 +38,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
 });
+
+Status.propTypes = {
+  player: PropTypes.oneOf([PLAYERS.X, PLAYERS.O]).isRequired,
+  status: PropTypes.oneOf([STATUS.DRAW, STATUS.INIT, STATUS.PLAY, STATUS.WIN])
+    .isRequired,
+};
 
 export default Status;

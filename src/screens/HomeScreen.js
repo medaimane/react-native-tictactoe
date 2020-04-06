@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   title: {
     padding: 8,
     color: Colors.Text,
+    fontWeight: 'bold',
     fontSize: 30,
   },
 });
