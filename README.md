@@ -25,10 +25,12 @@
 
 - Initial, playinng, draw and win states:
 
-<img width="100" src="./docs/2.png" alt="Empty State" />
-<img width="100" src="./docs/3.png" alt="Playing State" />
-<img width="100" src="./docs/4.png" alt="Draw State" />
-<img width="100" src="./docs/5.png" alt="Winner State" />
+<div align="center" >
+  <img width="200" src="./docs/2.png" alt="Empty State" />
+  <img width="200" src="./docs/3.png" alt="Playing State" />
+  <img width="200" src="./docs/4.png" alt="Draw State" />
+  <img width="200" src="./docs/5.png" alt="Winner State" />
+</div>
 
 ## Instructions
 
