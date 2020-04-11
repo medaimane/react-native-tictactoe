@@ -1,6 +1,29 @@
-# Tic Tac Toe Game
+<h1 align="center">
+  React Native 2020 by<br><a href="http://medaimane.github.io/">medaimane</a>
+</h1>
 
-Build a simple tic tac toe game using React Native.
+<p align="center">
+  <strong>Tic Tac Toe Game</strong><br>
+  Build a simple tic tac toe game using React Native.
+</p>
+
+## Demo:
+
+- Initial State:
+
+![Empty State](./docs/2.png)
+
+- Playing State:
+
+![Playing State](./docs/3.png)
+
+- Winner State:
+
+![Winner State](./docs/5.png)
+
+- Draw State:
+
+![Draw State](./docs/4.png)
 
 ## The implemented criteria
 
